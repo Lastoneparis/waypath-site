@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "issuedAt": "2026-07-27T08:29:15Z",
+  "apiBaseURL": "https://waypath.213-199-60-210.sslip.io",
+  "anonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzg0NDU4Mjk3LCJleHAiOjIwOTk4MTgyOTd9.arAgATtaM5JcTsff5eq8GZqk8XKRzBik7iSX7WAejIc",
+  "minSupportedBuild": 0,
+  "signature": "V0qVG/OTOMgdz0AOWjwkSLor3wce7N7xqg0iE8d2wgPZDR38LWOxbFawpbGnWm4rqIpAdAwFTWaodZ0EmV3ABw=="
+}

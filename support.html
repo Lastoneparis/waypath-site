@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Waypath &mdash; Support</title>
+<meta name="description" content="Waypath support: location permission, GPS accuracy, drawing and reusing routes, and where your data lives.">
+<style>
+:root{--bg:#fbfbf9;--card:#fff;--ink:#14171a;--dim:#5d6873;--rule:#e3e6e4;--route:#1f7a5c}
+@media(prefers-color-scheme:dark){:root{--bg:#0d0f11;--card:#15181b;--ink:#e8ecef;--dim:#95a0aa;--rule:#232729;--route:#4cc79b}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.68 -apple-system,BlinkMacSystemFont,system-ui,sans-serif}
+.w{max-width:43rem;margin:0 auto;padding:0 22px 86px}
+.crumb{padding:20px 0;font-size:13px;color:var(--dim);border-bottom:1px solid var(--rule)}
+h1{font-size:32px;margin:40px 0 26px;font-weight:700;letter-spacing:-.025em}
+h2{font-size:17px;margin:30px 0 8px;font-weight:650}
+p{color:var(--dim);margin-bottom:12px}
+a{color:var(--route)}
+footer{border-top:1px solid var(--rule);margin-top:44px;padding-top:24px;color:var(--dim);font-size:13px}
+</style>
+</head>
+<body>
+<div class="w">
+<div class="crumb"><a href="index.html">Waypath</a> &rsaquo; Support</div>
+<h1>Support</h1>
+
+<h2>The activity stopped recording when the screen locked</h2>
+<p>Location permission needs to be Always, not While Using. With While Using, iOS suspends the app once the screen has been off for a while and the track ends there. Settings &rsaquo; Privacy &amp; Security &rsaquo; Location Services &rsaquo; Waypath.</p>
+
+<h2>My distance is short, or the track cuts corners</h2>
+<p>GPS is worst exactly where running is most common: under trees, between tall buildings, in the first minute before the fix settles. Waypath smooths the track, which trims a little distance rather than inventing it. Starting outside and waiting for the accuracy indicator before you set off makes a visible difference.</p>
+
+<h2>The heatmap looks empty</h2>
+<p>It is built only from your own completed activities. One run is a line, not a heatmap; it starts telling you something after roughly ten. There is no community data feeding it.</p>
+
+<h2>Can I import a GPX route from somewhere else</h2>
+<p>Routes are drawn in the app in this version. If you need a specific import or export path, write and say which format &mdash; it is useful to know what people actually have.</p>
+
+<h2>Deleting a route or an activity</h2>
+<p>Swipe on the item in its list. Deletion is local and immediate, and there is nothing on a server to also delete, because there is no server.</p>
+
+<h2>Where is my data</h2>
+<p>On your iPhone. No account, no sign-in, no upload. Removing the app removes the history with it.</p>
+
+<h2>Anything else</h2>
+<p><a href="mailto:contact@oshi-messenger.com">contact@oshi-messenger.com</a>.</p>
+
+<footer>© 2026 Oshi Lab · <a href="mailto:contact@oshi-messenger.com">contact@oshi-messenger.com</a></footer>
+</div>
+</body>
+</html>

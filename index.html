@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Waypath &mdash; draw the route first, then run it</title>
+<meta name="description" content="A run, walk and ride tracker built around routes: draw one on the map before you go, follow it live, and watch your own heatmap show which paths you actually take.">
+<style>
+:root{--bg:#fbfbf9;--card:#fff;--ink:#14171a;--dim:#5d6873;--rule:#e3e6e4;
+      --route:#1f7a5c;--heat1:#ffe08a;--heat2:#f59f3c;--heat3:#dc4b2a;--planned:#7b8794}
+@media(prefers-color-scheme:dark){:root{--bg:#0d0f11;--card:#15181b;--ink:#e8ecef;--dim:#95a0aa;--rule:#232729;--route:#4cc79b}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.68 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+.w{max-width:46rem;margin:0 auto;padding:0 22px 86px}
+header{padding:66px 0 24px}
+.mark{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--route);font-weight:700;margin-bottom:14px}
+h1{font-size:clamp(28px,5.6vw,42px);line-height:1.15;letter-spacing:-.025em;font-weight:700;max-width:18ch}
+.lede{color:var(--dim);font-size:17.5px;margin-top:15px;max-width:47ch}
+h2{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:16px}
+section{padding:34px 0;border-top:1px solid var(--rule)}
+p{color:var(--dim);margin-bottom:13px}
+
+/* the map card — Waypath's motif */
+.map{background:var(--card);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
+.map svg{display:block;width:100%;height:220px;background:linear-gradient(160deg,rgba(31,122,92,.05),transparent)}
+.map .cap{padding:13px 17px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);
+  display:flex;gap:18px;flex-wrap:wrap}
+.map .cap i{display:inline-block;width:18px;height:3px;border-radius:2px;vertical-align:3px;margin-right:7px}
+
+.steps{list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:0 0 22px 46px}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:28px;height:28px;border-radius:50%;
+  border:1.5px solid var(--route);color:var(--route);font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center}
+.steps li::after{content:"";position:absolute;left:13.5px;top:30px;bottom:6px;width:1.5px;background:var(--rule)}
+.steps li:last-child::after{display:none}
+.steps b{display:block;font-weight:650;color:var(--ink);margin-bottom:2px}
+.steps span{color:var(--dim);font-size:15px}
+
+.stub{background:var(--card);border:1px dashed var(--rule);border-radius:12px;padding:18px 20px}
+.stub h3{font-size:16px;font-weight:650;margin-bottom:9px}
+.stub p{font-size:15px;margin-bottom:9px}
+.stub p:last-child{margin-bottom:0}
+a{color:var(--route)}
+footer{border-top:1px solid var(--rule);padding-top:24px;color:var(--dim);font-size:13px}
+</style>
+</head>
+<body>
+<div class="w">
+
+<header>
+  <div class="mark">Waypath &middot; run, walk, ride</div>
+  <h1>The route comes before the run, not after it</h1>
+  <p class="lede">Most trackers hand you a map when you finish. Waypath starts there: draw the route you mean to take, follow it live, and let your own history build a heatmap of the paths you really use.</p>
+</header>
+
+<section style="border-top:0;padding-top:6px">
+  <h2>Planned route against your own heat</h2>
+  <div class="map">
+    <svg viewBox="0 0 640 220" role="img" aria-label="A map card showing a planned dashed route and a heatmap of previously taken paths">
+      <g stroke-linecap="round" fill="none">
+        <path d="M40 186 C120 176 150 120 214 112 S320 132 372 96 S470 44 596 40" stroke="var(--heat1)" stroke-width="13" opacity=".85"/>
+        <path d="M40 186 C120 176 150 120 214 112 S320 132 372 96" stroke="var(--heat2)" stroke-width="9" opacity=".9"/>
+        <path d="M40 186 C120 176 150 120 214 112" stroke="var(--heat3)" stroke-width="6"/>
+        <path d="M40 186 C132 190 176 96 250 92 S330 40 420 62 S540 130 600 168" stroke="var(--planned)" stroke-width="2.5" stroke-dasharray="9 7"/>
+      </g>
+      <circle cx="40" cy="186" r="6" fill="var(--route)"/>
+      <circle cx="600" cy="168" r="6" fill="var(--card)" stroke="var(--planned)" stroke-width="2.5"/>
+    </svg>
+    <div class="cap">
+      <span><i style="background:var(--planned)"></i>Route you drew</span>
+      <span><i style="background:var(--heat3)"></i>Taken often</span>
+      <span><i style="background:var(--heat1)"></i>Taken once or twice</span>
+    </div>
+  </div>
+  <p style="margin-top:16px">The interesting part is the disagreement. The heatmap shows where you actually go; the dashed line shows where you intended to. After a few weeks the gap between them is the most useful thing on the screen.</p>
+</section>
+
+<section>
+  <h2>How a planned run works</h2>
+  <ol class="steps">
+    <li><b>Draw it on the map</b><span>Tap out the route before you leave. Distance updates as you draw, so you can shape it to the number you wanted.</span></li>
+    <li><b>Follow it live</b><span>During the activity the route is on the map with your position on it, and you can see when you have drifted off.</span></li>
+    <li><b>Keep it</b><span>A route you liked is saved and can be run again, which is how a route becomes a benchmark rather than a one-off.</span></li>
+    <li><b>Watch the heat build</b><span>Each completed activity feeds the heatmap. It gets useful somewhere around the tenth run.</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>What version one honestly is</h2>
+  <div class="stub">
+    <h3>The heatmap is yours alone</h3>
+    <p>It is built entirely from <em>your</em> own recorded activities, on your own device. There is no community heatmap and no global one &mdash; the architecture has a place for it, but there is no backend behind that place, and shipping an empty social feature would be worse than not shipping it.</p>
+    <p>Which also means: nothing you record is uploaded anywhere. There is no account and no server. Your routes are a file on your phone.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Help &amp; legal</h2>
+  <p><a href="support.html">Support</a> &middot; <a href="privacy/">Privacy policy</a> &middot; <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Licence</a></p>
+</section>
+
+<footer>© 2026 Oshi Lab · <a href="mailto:contact@oshi-messenger.com">contact@oshi-messenger.com</a></footer>
+</div>
+</body>
+</html>
